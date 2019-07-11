@@ -48,6 +48,17 @@ class HelloWorldServiceTestCase {
     }
 
 
+    @Test
+    void requesting_with_name_will_then_greet_said_name() throws ExecutionException, InterruptedException {
+        final String name = "World";
+        final CompletableFuture<HelloWorldResponse> responseFuture = new CompletableFuture<>();
+        stub.greet(HelloWorldRequest.newBuilder().setName(name).build(), new SimpleHelloWorldStreamObserver(responseFuture));
+
+        final String expectedMessage = "Hello, World!";
+        assertThat(responseFuture.get().getMessage()).isEqualTo(expectedMessage);
+    }
+
+
     @AfterEach
     void tearDown() {
         registeredChannel.shutdownNow();

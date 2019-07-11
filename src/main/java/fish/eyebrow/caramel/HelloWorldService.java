@@ -7,7 +7,10 @@ class HelloWorldService extends HelloWorldImplBase {
 
     @Override
     public void greet(final HelloWorldRequest request, final StreamObserver<HelloWorldResponse> responseObserver) {
-        responseObserver.onNext(HelloWorldResponse.newBuilder().build());
+        final String requestedName = request.getName();
+        final String responseMessage = "Hello, " + requestedName + "!";
+
+        responseObserver.onNext(HelloWorldResponse.newBuilder().setMessage(responseMessage).build());
         responseObserver.onCompleted();
     }
 }
