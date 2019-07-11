@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "fish.eyebrow.caramel";
+option java_multiple_files = true;
+
+service HelloWorld {
+    rpc greet(HelloWorldRequest) returns (HelloWorldResponse) {}
+}
+
+message HelloWorldRequest {
+    string name = 1;
+}
+
+message HelloWorldResponse {
+    string message = 1;
+}
