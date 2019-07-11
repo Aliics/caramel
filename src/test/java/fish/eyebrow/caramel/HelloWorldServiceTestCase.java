@@ -50,12 +50,21 @@ class HelloWorldServiceTestCase {
 
     @Test
     void requesting_with_name_will_then_greet_said_name() throws ExecutionException, InterruptedException {
-        final String name = "World";
+        final String name = "Alexander";
         final CompletableFuture<HelloWorldResponse> responseFuture = new CompletableFuture<>();
         stub.greet(HelloWorldRequest.newBuilder().setName(name).build(), new SimpleHelloWorldStreamObserver(responseFuture));
 
-        final String expectedMessage = "Hello, World!";
+        final String expectedMessage = "Hello, Alexander!";
         assertThat(responseFuture.get().getMessage()).isEqualTo(expectedMessage);
+    }
+
+
+    @Test
+    void building_a_request_without_a_name_specified_will_return_default() throws ExecutionException, InterruptedException {
+        final CompletableFuture<HelloWorldResponse> responseFuture = new CompletableFuture<>();
+        stub.greet(HelloWorldRequest.newBuilder().build(), new SimpleHelloWorldStreamObserver(responseFuture));
+
+        assertThat(responseFuture.get().getMessage()).isEqualTo("Hello, World!");
     }
 
 
