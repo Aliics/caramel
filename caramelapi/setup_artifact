@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+mvn install:install-file -Dfile=target/caramel-api-1.0-SNAPSHOT.jar -DgroupId=fish.eyebrow -DartifactId=caramel-api -Dversion=1.0-SNAPSHOT -Dpackaging=jar -DcreateChecksum=true
